@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
 
+//  GET ----------------------------------------------------------------------------------------------------------------
 
     @Override
     public List<User> getAll() {
@@ -45,14 +46,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> filter(String field, String param) {
+        return List.of();
+    }
+
+
+//  POST ---------------------------------------------------------------------------------------------------------------
+
+    @Override
     public User create(User user) {
         return repository.save(user);
     }
 
     @Override
     public User update(int id, User user) {
-        return null;
+        User updatedUser = repository.findById(id).get();
+        if (user.getFirstName() != null) {
+            updatedUser.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null) {
+            updatedUser.setLastName(user.getLastName());
+        }
+        if (user.getLand() != null) {
+            updatedUser.setLand(user.getLand());
+        }
+        if (user.getAge() != 0) {
+            updatedUser.setAge(user.getAge());
+        }
+        repository.save(updatedUser);
+        return repository.findById(id).get();
     }
+
+//  DELETE -------------------------------------------------------------------------------------------------------------
 
     @Override
     public User delete(int id) {
@@ -61,8 +86,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Override
-    public List<User> filter(String field, String param) {
-        return List.of();
-    }
 }

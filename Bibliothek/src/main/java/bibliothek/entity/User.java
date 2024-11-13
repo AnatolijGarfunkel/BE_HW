@@ -1,5 +1,6 @@
 package bibliothek.entity;
 
+import bibliothek.enums.OriginLand;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,5 +21,5 @@ public class User {
 
     private int age;
 
-    private String land;
+    private OriginLand land;
 }

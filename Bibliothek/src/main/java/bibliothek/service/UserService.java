@@ -18,11 +18,12 @@ public interface UserService {
 
     List<User> getByLand(String land);
 
+    List<User> filter(String field, String param);
+
     User create(User user);
 
     User update(int id, User user);
 
     User delete(int id);
 
-    List<User> filter(String field, String param);
 }
