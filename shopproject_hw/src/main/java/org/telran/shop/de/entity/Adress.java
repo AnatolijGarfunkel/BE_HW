@@ -12,6 +12,8 @@ public class Adress {
 
     private String fullAdress;
 
+    private long user_id;
+
     public Adress() {
     }
 
@@ -29,5 +31,13 @@ public class Adress {
 
     public void setFullAdress(String fullAdress) {
         this.fullAdress = fullAdress;
+    }
+
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
     }
 }

@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getByFullAdress(String fullAddress) {
-        return null;
+        return jpaRepository.findAllByAdresses(fullAddress);
     }
 
 // POST ----------------------------------------------------------------------------------------------------------------
