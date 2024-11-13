@@ -1,4 +1,4 @@
-package bibliothek.last.entity;
+package bibliothek.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

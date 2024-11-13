@@ -1,7 +1,7 @@
-package bibliothek.last.controller;
+package bibliothek.controller;
 
-import bibliothek.last.entity.User;
-import bibliothek.last.service.LastService;
+import bibliothek.entity.User;
+import bibliothek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,10 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bibliothek")
-public class LastController {
+public class UserController {
 
     @Autowired
-    private LastService service;
+    private UserService service;
+
+//  GET ----------------------------------------------------------------------------------------------------------------
 
     @GetMapping
     public List<User> getALL() {
@@ -24,10 +26,14 @@ public class LastController {
         return service.getById(id);
     }
 
+//  POST ---------------------------------------------------------------------------------------------------------------
+
     @PostMapping
     public User create(@RequestBody User user) {
         return service.create(user);
     }
+
+//  DELETE -------------------------------------------------------------------------------------------------------------
 
     @DeleteMapping
     public User delete(@RequestParam(name = "id") int id) {

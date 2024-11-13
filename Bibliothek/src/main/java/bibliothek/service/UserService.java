@@ -1,11 +1,10 @@
-package bibliothek.old.service;
+package bibliothek.service;
 
-import bibliothek.old.model.User;
+import bibliothek.entity.User;
 
 import java.util.List;
 
-
-public interface OldService {
+public interface UserService {
 
     List<User> getAll();
 

@@ -1,66 +1,68 @@
-package bibliothek.old.service;
+package bibliothek.service;
 
-import bibliothek.old.model.User;
-import bibliothek.old.repository.OldRepository;
+import bibliothek.entity.User;
+import bibliothek.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class OldServiceImpl implements OldService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private OldRepository oldRepository;
+    private UserRepository repository;
 
 
     @Override
     public List<User> getAll() {
-        return oldRepository.getAll();
+        return repository.findAll();
     }
 
     @Override
     public User getById(int id) {
-        return oldRepository.getById(id);
+        return repository.findById(id).get();
     }
 
     @Override
     public User getByName(String firstName, String lastName) {
-        return oldRepository.getByName(firstName, lastName);
+        return null;
     }
 
     @Override
     public List<User> getByFirstName(String firstName) {
-        return oldRepository.getByFirstName(firstName);
+        return List.of();
     }
 
     @Override
     public List<User> getByLastName(String lastName) {
-        return oldRepository.getByLastName(lastName);
+        return List.of();
     }
 
     @Override
     public List<User> getByLand(String land) {
-        return oldRepository.getByLand(land);
+        return List.of();
     }
 
     @Override
     public User create(User user) {
-        return oldRepository.create(user);
+        return repository.save(user);
     }
 
     @Override
     public User update(int id, User user) {
-        return oldRepository.update(id, user);
+        return null;
     }
 
     @Override
     public User delete(int id) {
-        return oldRepository.delete(id);
+        User user = repository.findById(id).get();
+        repository.delete(user);
+        return user;
     }
 
     @Override
     public List<User> filter(String field, String param) {
-        return oldRepository.filter(field, param);
+        return List.of();
     }
 }
