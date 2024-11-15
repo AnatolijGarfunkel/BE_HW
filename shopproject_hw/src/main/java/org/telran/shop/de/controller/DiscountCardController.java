@@ -53,8 +53,8 @@ public class DiscountCardController {
     }
 
     @PutMapping("/expired/{id}")
-    public void setExpired(@PathVariable long id) {
-        cardService.setExpired(id);
+    public DiscountCard setExpired(@PathVariable long id) {
+        return cardService.setExpired(id);
     }
 
 // DELETE --------------------------------------------------------------------------------------------------------------

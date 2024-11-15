@@ -14,7 +14,7 @@ public interface DiscountCardService {
 
     DiscountCard create(DiscountCard card);
 
-    void setExpired(long id);
+    DiscountCard setExpired(long id);
 
     void deleteById(long id);
 

@@ -18,6 +18,6 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
     @Query("select u from User u where u.userInfo is not null")
     List<User> getUserWithUserInfo();
 
-    @Query("select u from Adress a inner join User u on a.user_id = u.id where a.fullAdress =:fullAddress")
+    @Query("select u.login from Adress a inner join User u on a.user_id = u.id where a.fullAdress =:fullAddress")
     List<User> findAllByAdresses(@Param("fullAddress") String fullAddress);
 }

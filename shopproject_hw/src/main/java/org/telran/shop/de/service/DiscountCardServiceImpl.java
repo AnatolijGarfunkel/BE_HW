@@ -39,11 +39,14 @@ public class DiscountCardServiceImpl implements DiscountCardService {
     }
 
     @Override
-    public void setExpired(long id) {
-        DiscountCard card = new DiscountCard();
-        card.setId(id);
-        card.setExpired(true);
-        repository.save(card);
+    public DiscountCard setExpired(long id) {
+//        DiscountCard card = new DiscountCard();
+//        card.setId(id);
+//        card.setExpired(true);
+//        repository.save(card);
+        repository.updateDiscountCardById(id);
+        DiscountCard tempCard = getById(id);
+        return tempCard;
     }
 
 // DELETE --------------------------------------------------------------------------------------------------------------
