@@ -7,7 +7,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserCreateDto {
+public class DtoUser {
+
+    // для создания объекта User из UserDto
 
     private String login;
 

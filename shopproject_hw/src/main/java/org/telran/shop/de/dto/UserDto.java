@@ -5,8 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class UserResponseDto {
+public class UserDto {
 
+    // для создания объекта UserDto из User
     private long id;
 
     private String login;
