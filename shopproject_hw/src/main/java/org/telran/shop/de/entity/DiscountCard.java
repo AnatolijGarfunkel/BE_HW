@@ -3,12 +3,11 @@ package org.telran.shop.de.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "discountcards")
+@Table(name = "discount_cards")
 public class DiscountCard {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     private boolean expired;
 
@@ -17,11 +16,11 @@ public class DiscountCard {
         //
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

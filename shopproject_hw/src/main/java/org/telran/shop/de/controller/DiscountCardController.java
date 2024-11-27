@@ -36,7 +36,7 @@ public class DiscountCardController {
     }
 
     @GetMapping("/{id}")
-    public DiscountCard getById(@PathVariable(name = "id") long id) {
+    public DiscountCard getById(@PathVariable(name = "id") String id) {
         return cardService.getById(id);
     }
 
@@ -53,14 +53,14 @@ public class DiscountCardController {
     }
 
     @PutMapping("/expired/{id}")
-    public DiscountCard setExpired(@PathVariable long id) {
+    public DiscountCard setExpired(@PathVariable String id) {
         return cardService.setExpired(id);
     }
 
 // DELETE --------------------------------------------------------------------------------------------------------------
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(name = "id") long id) {
+    public void delete(@PathVariable(name = "id") String id) {
         cardService.deleteById(id);
     }
 

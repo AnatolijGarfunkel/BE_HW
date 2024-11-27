@@ -2,7 +2,7 @@ package org.telran.shop.de.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telran.shop.de.entity.Adress;
+import org.telran.shop.de.entity.Address;
 import org.telran.shop.de.entity.User;
 import org.telran.shop.de.repository.UserJpaRepository;
 
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByName(String login) {
+    public User getByLogin(String login) {
         return jpaRepository.findByLogin(login);
     }
 
     @Override
-    public List<User> getByFullAdress(String fullAddress) {
-        return jpaRepository.findAllByAdresses(fullAddress);
+    public List<User> getByFullAddress(String fullAddress) {
+        return jpaRepository.findAllByAddress(fullAddress);
     }
 
 // POST ----------------------------------------------------------------------------------------------------------------
@@ -61,8 +61,8 @@ public class UserServiceImpl implements UserService {
         if (user.getInformation() != null) {
             updatedUser.setInformation(user.getInformation());
         }
-        if (!user.getAdresses().isEmpty()) {
-            updatedUser.setAdresses(user.getAdresses());
+        if (!user.getAddresses().isEmpty()) {
+            updatedUser.setAddresses(user.getAddresses());
         }
         if (user.getPassport() != null) {
             updatedUser.setPassport(user.getPassport());
@@ -71,10 +71,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateAdress(long id, User user) {
+    public User updateAddress(long id, User user) {
         User updatedUser = getById(id);
-        for (Adress data : user.getAdresses()) {
-            updatedUser.getAdresses().add(data);
+        for (Address data : user.getAddresses()) {
+            updatedUser.getAddresses().add(data);
         }
         return jpaRepository.save(updatedUser);
     }

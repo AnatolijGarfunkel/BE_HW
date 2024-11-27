@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telran.shop.de.entity.Product;
 import org.telran.shop.de.enums.ProductType;
+import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.repository.ProductRepository;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -19,12 +21,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return productRepository.findAll();
+        List<Product> all = productRepository.findAll();
+        return all;
     }
 
     @Override
     public Product getById(long id) {
-        return productRepository.findById(id).orElse(null);
+        return productRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> new NotFoundException("Product wiht id " + id + " not found")
+                );
     }
 
     @Override

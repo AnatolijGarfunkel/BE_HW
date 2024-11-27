@@ -14,6 +14,7 @@ public class Product {
 
     private String title;
 
+    @Enumerated(EnumType.STRING)
     private ProductType type;
 
 

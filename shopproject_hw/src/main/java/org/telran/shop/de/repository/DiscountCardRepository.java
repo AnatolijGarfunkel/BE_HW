@@ -17,9 +17,14 @@ public interface DiscountCardRepository extends JpaRepository<DiscountCard, Long
 
 //    @Modifying
 //    @Query("update DiscountCard c set c.expired = true where c.id =:id")
-//    DiscountCard updateDiscountCardById(@Param("id") long id);
+//    DiscountCard updateDiscountCardById(@Param("id") String id);
 
     @Modifying
     @Query("update DiscountCard card set card.expired = true where card.id =:id")
-    DiscountCard updateDiscountCardById(long id);
+    DiscountCard updateDiscountCardById(String id);
+
+    @Query("select card from DiscountCard card where card.id =:id")
+    DiscountCard findDiscountCardById(String id);
+
+    void deleteDiscountCardById(String id);
 }

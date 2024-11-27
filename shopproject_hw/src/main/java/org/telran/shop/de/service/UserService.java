@@ -10,15 +10,15 @@ public interface UserService {
 
     User getById(long id);
 
-    User getByName(String login);
+    User getByLogin(String login);
 
-    List<User> getByFullAdress(String fullAddress);
+    List<User> getByFullAddress(String fullAddress);
 
     User create(User user);
 
     User update(long id, User user);
 
-    User updateAdress(long id, User user);
+    User updateAddress(long id, User user);
 
     User delete(long id);
 

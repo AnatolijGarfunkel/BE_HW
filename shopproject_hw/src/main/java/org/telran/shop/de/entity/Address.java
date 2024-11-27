@@ -3,18 +3,18 @@ package org.telran.shop.de.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "adresses")
-public class Adress {
+@Table(name = "addresses")
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String fullAdress;
+    private String fullAddress;
 
     private long user_id;
 
-    public Adress() {
+    public Address() {
     }
 
     public int getId() {
@@ -25,12 +25,12 @@ public class Adress {
         this.id = id;
     }
 
-    public String getFullAdress() {
-        return fullAdress;
+    public String getFullAddress() {
+        return fullAddress;
     }
 
-    public void setFullAdress(String fullAdress) {
-        this.fullAdress = fullAdress;
+    public void setFullAddress(String fullAdress) {
+        this.fullAddress = fullAdress;
     }
 
     public long getUser_id() {

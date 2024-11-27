@@ -28,13 +28,13 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public User getByName (@RequestParam String login) {
-        return userService.getByName(login);
+    public User getByLogin (@RequestParam String login) {
+        return userService.getByLogin(login);
     }
 
-    @GetMapping("/fulladress")
+    @GetMapping("/fulladdress")
     public List<User> getByFullAddress(@RequestParam String fullAddress) {
-        return userService.getByFullAdress(fullAddress);
+        return userService.getByFullAddress(fullAddress);
     }
 
 // POST ----------------------------------------------------------------------------------------------------------------
@@ -49,11 +49,10 @@ public class UserController {
         return userService.update(id, user);
     }
 
-    @PutMapping("/adress/{id}")
-    public User updateAdress(@PathVariable long id, @RequestBody User user) {
-        return userService.updateAdress(id, user);
+    @PutMapping("/address/{id}")
+    public User updateAddress(@PathVariable long id, @RequestBody User user) {
+        return userService.updateAddress(id, user);
     }
-
 
     @PostMapping("/equals_password")
     public List<User> getWithEqualsPassword(@RequestBody String password) {

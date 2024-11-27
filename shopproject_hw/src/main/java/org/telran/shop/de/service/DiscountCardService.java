@@ -8,14 +8,14 @@ public interface DiscountCardService {
 
     List<DiscountCard> getAll();
 
-    DiscountCard getById(long id);
+    DiscountCard getById(String id);
 
     List<DiscountCard> filter(boolean expired);
 
     DiscountCard create(DiscountCard card);
 
-    DiscountCard setExpired(long id);
+    DiscountCard setExpired(String id);
 
-    void deleteById(long id);
+    void deleteById(String id);
 
 }

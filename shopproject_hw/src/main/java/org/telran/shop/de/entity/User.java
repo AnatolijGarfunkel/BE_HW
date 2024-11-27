@@ -26,7 +26,7 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private List<Adress> adresses = new ArrayList<>();
+    private List<Address> addresses = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "passport_id", referencedColumnName = "id")
@@ -36,12 +36,12 @@ public class User {
         //
     }
 
-    public List<Adress> getAdresses() {
-        return adresses;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAdresses(List<Adress> adresses) {
-        this.adresses = adresses;
+    public void setAddresses(List<Address> adresses) {
+        this.addresses = adresses;
     }
 
 
