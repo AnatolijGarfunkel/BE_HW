@@ -2,9 +2,13 @@ package org.telran.shop.de.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.telran.shop.de.converter.Converter;
+import org.telran.shop.de.dto.DtoUser;
+import org.telran.shop.de.dto.UserDto;
 import org.telran.shop.de.entity.User;
 import org.telran.shop.de.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -12,58 +16,44 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserService service;
+
+    @Autowired
+    private Converter<User, DtoUser, UserDto> converter;
 
 
 // GET -----------------------------------------------------------------------------------------------------------------
 
-    @GetMapping
-    public List<User> getAll () {
-        return userService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public User getById(@PathVariable long id) {
-        return userService.getById(id);
-    }
+//    @GetMapping("/login")
+//    public User getByLogin (@RequestParam String login) {
+//        return service.getByLogin(login);
+//    }
 
     @GetMapping("/login")
-    public User getByLogin (@RequestParam String login) {
-        return userService.getByLogin(login);
-    }
-
-    @GetMapping("/fulladdress")
-    public List<User> getByFullAddress(@RequestParam String fullAddress) {
-        return userService.getByFullAddress(fullAddress);
+    public UserDto getByLogin(@RequestParam("login") String login) {
+        User user = service.getByLogin(login);
+        UserDto dto = converter.toDto(user);
+        return dto;
     }
 
 // POST ----------------------------------------------------------------------------------------------------------------
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.create(user);
-    }
-
-    @PutMapping("/{id}")
-    public User update(@PathVariable long id, @RequestBody User user) {
-        return userService.update(id, user);
-    }
-
-    @PutMapping("/address/{id}")
-    public User updateAddress(@PathVariable long id, @RequestBody User user) {
-        return userService.updateAddress(id, user);
+    public User create(@RequestBody DtoUser dto) {
+        User user = converter.toEntity(dto);
+        return service.create(user);
     }
 
     @PostMapping("/equals_password")
     public List<User> getWithEqualsPassword(@RequestBody String password) {
-        return userService.getWithEqualsPassword(password);
+        return service.getWithEqualsPassword(password);
     };
 
 // DELETE --------------------------------------------------------------------------------------------------------------
 
     @DeleteMapping("/{id}")
     public User delete(@PathVariable long id) {
-        return userService.delete(id);
+        return service.delete(id);
     }
 
 }
