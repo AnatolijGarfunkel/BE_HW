@@ -29,8 +29,6 @@ public class User {
     @Email
     private String email;
 
-    private String userInfo;
-
     @Column(name = "description")
     private String information;
 
