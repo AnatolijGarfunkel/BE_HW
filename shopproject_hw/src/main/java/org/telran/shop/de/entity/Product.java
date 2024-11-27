@@ -1,11 +1,17 @@
 package org.telran.shop.de.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.telran.shop.de.enums.ProductType;
 
 
 @Entity
 @Table(name = "products")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Product {
 
     @Id
@@ -17,32 +23,4 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductType type;
 
-
-    public Product() {
-        //
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public ProductType getType() {
-        return type;
-    }
-
-    public void setType(ProductType type) {
-        this.type = type;
-    }
 }

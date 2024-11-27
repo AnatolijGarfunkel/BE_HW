@@ -1,9 +1,15 @@
 package org.telran.shop.de.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "passport")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Passport {
 
     @Id
@@ -12,22 +18,4 @@ public class Passport {
 
     private String nummber;
 
-    public Passport() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNummber() {
-        return nummber;
-    }
-
-    public void setNummber(String nummber) {
-        this.nummber = nummber;
-    }
 }

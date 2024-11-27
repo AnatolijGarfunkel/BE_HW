@@ -40,8 +40,11 @@ public class User {
     @JoinColumn(name = "passport_id", referencedColumnName = "id")
     private Passport passport;
 
+
+
     public User(String login, String email) {
         this.login = login;
         this.email = email;
     }
+
 }

@@ -1,9 +1,15 @@
 package org.telran.shop.de.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "discount_cards")
+@NoArgsConstructor
+@Getter
+@Setter
 public class DiscountCard {
 
     @Id
@@ -11,18 +17,6 @@ public class DiscountCard {
 
     private boolean expired;
 
-
-    public DiscountCard() {
-        //
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public boolean isExpired() {
         return expired;
