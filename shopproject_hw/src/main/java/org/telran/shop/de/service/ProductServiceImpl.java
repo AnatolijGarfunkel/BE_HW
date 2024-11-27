@@ -8,26 +8,25 @@ import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.repository.ProductRepository;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository repository;
 
 
 // GET -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public List<Product> getAll() {
-        List<Product> all = productRepository.findAll();
+        List<Product> all = repository.findAll();
         return all;
     }
 
     @Override
     public Product getById(long id) {
-        return productRepository
+        return repository
                 .findById(id)
                 .orElseThrow(
                         () -> new NotFoundException("Product wiht id " + id + " not found")
@@ -36,19 +35,23 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getByType(String type) {
-        return productRepository.findAllByType(ProductType.valueOf(type));
+        return repository.findAllByType(ProductType.valueOf(type));
     }
 
     @Override
     public Product getByTitle(String title) {
-        return productRepository.findByTitle(title);
+        Product product = repository.findByTitle(title);
+        if (product == null) {
+            throw new NotFoundException("Product with title " + title + " not found");
+        }
+        return product;
     }
 
 // POST ----------------------------------------------------------------------------------------------------------------
 
     @Override
     public Product put(Product product) {
-        return productRepository.save(product);
+        return repository.save(product);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
         if (product.getType() != null) {
             updatedProduct.setType(product.getType());
         }
-        return productRepository.save(updatedProduct);
+        return repository.save(updatedProduct);
     }
 
 // DELETE --------------------------------------------------------------------------------------------------------------
@@ -68,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product deleteById(long id) {
         Product product = getById(id);
-        productRepository.deleteById(id);
+        repository.deleteById(id);
         return product;
     }
 
@@ -76,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
     public Product deleteByTitle(String title) {
         Product product = getByTitle(title);
         long id = product.getId();
-        productRepository.deleteById(id);
+        repository.deleteById(id);
         return product;
     }
 

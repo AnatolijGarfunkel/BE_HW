@@ -2,8 +2,10 @@ package org.telran.shop.de.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.telran.shop.de.entity.Product;
+import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.service.ProductService;
 
 import java.util.List;

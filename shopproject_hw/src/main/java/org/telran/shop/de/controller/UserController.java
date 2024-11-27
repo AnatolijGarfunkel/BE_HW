@@ -1,5 +1,8 @@
 package org.telran.shop.de.controller;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -7,12 +10,11 @@ import org.telran.shop.de.converter.Converter;
 import org.telran.shop.de.dto.DtoUser;
 import org.telran.shop.de.dto.UserDto;
 import org.telran.shop.de.entity.User;
-import org.telran.shop.de.exception.AllreadyExist;
-import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
@@ -37,9 +39,11 @@ public class UserController {
 // POST ----------------------------------------------------------------------------------------------------------------
 
     @PostMapping
-    public User create(@RequestBody DtoUser dto) {
+    public UserDto create(@RequestBody @Valid DtoUser dto) {
         User user = converter.toEntity(dto);
-        return service.create(user);
+        User newUser = service.create(user);
+        UserDto newDto = converter.toDto(newUser);
+        return newDto;
     }
 
 // DELETE --------------------------------------------------------------------------------------------------------------
@@ -51,14 +55,17 @@ public class UserController {
 
 // EXCEPTION -----------------------------------------------------------------------------------------------------------
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public String handleNotFoundException(Exception exception) {
-        return exception.getMessage();
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Map<String, String> handleConstraintViolationException(ConstraintViolationException exception) {
+        Map<String, String> errorMap = new HashMap<>();
+        Set<ConstraintViolation<?>> constraintViolations = exception.getConstraintViolations();
+        for (ConstraintViolation<?> violation : constraintViolations) {
+            String message = violation.getMessage();
+            String param = violation.getPropertyPath().toString();
+            errorMap.put(param, message);
+        }
+        return errorMap;
     }
 
-    @ExceptionHandler(AllreadyExist.class)
-    public String handleAllreadyExistException(Exception exception) {
-        return exception.getMessage();
-    }
 }
