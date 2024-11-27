@@ -3,7 +3,7 @@ package org.telran.shop.de.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telran.shop.de.entity.DiscountCard;
-import org.telran.shop.de.exception.AllreadyExist;
+import org.telran.shop.de.exception.AlreadyExist;
 import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.repository.DiscountCardRepository;
 
@@ -47,7 +47,7 @@ public class DiscountCardServiceImpl implements DiscountCardService {
     public DiscountCard create(DiscountCard card) {
         DiscountCard cardById = repository.findDiscountCardById(card.getId());
         if (cardById != null) {
-            throw new AllreadyExist("Card with id " + card.getId() + " already exists");
+            throw new AlreadyExist("Card with id " + card.getId() + " already exists");
         }
         return repository.save(card);
     }

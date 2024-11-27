@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.telran.shop.de.exception.AllreadyExist;
+import org.telran.shop.de.exception.AlreadyExist;
 import org.telran.shop.de.exception.NotFoundException;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(AllreadyExist.class)
+    @ExceptionHandler(AlreadyExist.class)
     public ResponseEntity<String> handleAllreadyExistException(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
     }

@@ -7,18 +7,6 @@ import org.telran.shop.de.service.DiscountCardService;
 
 import java.util.List;
 
-
-// getAll - GET    http://localhost:8080/api/discountcards
-// create - POST   http://localhost:8080/api/discountcards
-// getById- GET    http://localhost:8080/api/discountcards/5674
-// delete - DELETE http://localhost:8080/api/discountcards/5674
-// update - PUT    http://localhost:8080/api/discountcards/5657
-
-// http://localhost:8080/api/discountcards/deleteCard/6567 !!!! Incorrect
-// http://localhost:8080/api/discountcards/create !!!! Incorrect
-
-// expire  http://localhost:8080/api/discountcards/expire/4356
-
 @RestController
 @RequestMapping("/api/discountcards")
 public class DiscountCardController {

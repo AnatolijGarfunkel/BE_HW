@@ -1,8 +1,8 @@
 package org.telran.shop.de.exception;
 
-public class AllreadyExist extends RuntimeException{
+public class AlreadyExist extends RuntimeException{
 
-    public AllreadyExist(String message) {
+    public AlreadyExist(String message) {
         super(message);
     }
 }

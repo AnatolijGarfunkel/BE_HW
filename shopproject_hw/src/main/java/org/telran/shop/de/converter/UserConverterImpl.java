@@ -1,6 +1,5 @@
 package org.telran.shop.de.converter;
 
-import jakarta.persistence.Column;
 import org.springframework.stereotype.Component;
 import org.telran.shop.de.dto.DtoUser;
 import org.telran.shop.de.dto.UserDto;
