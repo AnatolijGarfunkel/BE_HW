@@ -17,23 +17,8 @@ public class UserServiceImpl implements UserService {
 // GET -----------------------------------------------------------------------------------------------------------------
 
     @Override
-    public List<User> getAll() {
-        return jpaRepository.findAll();
-    }
-
-    @Override
-    public User getById(long id) {
-        return jpaRepository.findById(id).get();
-    }
-
-    @Override
     public User getByLogin(String login) {
         return jpaRepository.findByLogin(login);
-    }
-
-    @Override
-    public List<User> getByFullAddress(String fullAddress) {
-        return jpaRepository.findAllByAddress(fullAddress);
     }
 
 // POST ----------------------------------------------------------------------------------------------------------------
@@ -41,42 +26,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         return jpaRepository.save(user);
-    }
-
-    @Override
-    public User update(long id, User user) {
-        User updatedUser = getById(id);
-        if (user.getLogin() != null) {
-            updatedUser.setLogin(user.getLogin());
-        }
-        if (user.getPassword() != null) {
-            updatedUser.setPassword(user.getPassword());
-        }
-        if (user.getEmail() != null) {
-            updatedUser.setEmail(user.getEmail());
-        }
-        if (user.getUserInfo() != null) {
-            updatedUser.setUserInfo(user.getUserInfo());
-        }
-        if (user.getInformation() != null) {
-            updatedUser.setInformation(user.getInformation());
-        }
-        if (!user.getAddresses().isEmpty()) {
-            updatedUser.setAddresses(user.getAddresses());
-        }
-        if (user.getPassport() != null) {
-            updatedUser.setPassport(user.getPassport());
-        }
-        return jpaRepository.save(updatedUser);
-    }
-
-    @Override
-    public User updateAddress(long id, User user) {
-        User updatedUser = getById(id);
-        for (Address data : user.getAddresses()) {
-            updatedUser.getAddresses().add(data);
-        }
-        return jpaRepository.save(updatedUser);
     }
 
     @Override
