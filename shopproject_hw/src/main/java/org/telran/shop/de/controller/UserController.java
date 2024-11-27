@@ -24,11 +24,6 @@ public class UserController {
 
 // GET -----------------------------------------------------------------------------------------------------------------
 
-//    @GetMapping("/login")
-//    public User getByLogin (@RequestParam String login) {
-//        return service.getByLogin(login);
-//    }
-
     @GetMapping("/login")
     public UserDto getByLogin(@RequestParam("login") String login) {
         User user = service.getByLogin(login);
@@ -43,11 +38,6 @@ public class UserController {
         User user = converter.toEntity(dto);
         return service.create(user);
     }
-
-    @PostMapping("/equals_password")
-    public List<User> getWithEqualsPassword(@RequestBody String password) {
-        return service.getWithEqualsPassword(password);
-    };
 
 // DELETE --------------------------------------------------------------------------------------------------------------
 

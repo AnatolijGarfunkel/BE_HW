@@ -1,5 +1,6 @@
 package org.telran.shop.de.repository;
 
+import jakarta.validation.constraints.Email;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,11 +14,6 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
 
     User findByLogin(String login);
 
-    List<User> findAllByPassword(String password);
-
-    @Query("select u from User u where u.userInfo is not null")
-    List<User> getUserWithUserInfo();
-
-    @Query("select u.login from Address a inner join User u on a.user_id = u.id where a.fullAddress =:fullAddress")
-    List<User> findAllByAddress(@Param("fullAddress") String fullAddress);
+    @Query("select user from User user where user.email =:email")
+    User findUserByEmail(@Email String email);
 }

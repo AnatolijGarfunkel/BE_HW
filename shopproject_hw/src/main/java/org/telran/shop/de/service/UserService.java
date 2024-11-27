@@ -11,7 +11,4 @@ public interface UserService {
     User create(User user);
 
     User delete(long id);
-
-    List<User> getWithEqualsPassword(String password);
-
 }

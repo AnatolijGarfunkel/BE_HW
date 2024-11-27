@@ -31,16 +31,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        User login = getByLogin(user.getLogin());
+        User login = jpaRepository.findByLogin(user.getLogin());
         if (login != null) {
             throw new AllreadyExist("User with login " + user.getLogin() + " already exists");
         }
+        User byEmail = jpaRepository.findUserByEmail(user.getEmail());
+        if (byEmail != null) {
+            throw new AllreadyExist("User with email " + user.getEmail() + " already exists");
+        }
         return jpaRepository.save(user);
-    }
-
-    @Override
-    public List<User> getWithEqualsPassword(String password) {
-        return jpaRepository.findAllByPassword(password);
     }
 
 // DELETE --------------------------------------------------------------------------------------------------------------
