@@ -1,11 +1,14 @@
 package org.telran.shop.de.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.telran.shop.de.converter.Converter;
 import org.telran.shop.de.dto.DtoUser;
 import org.telran.shop.de.dto.UserDto;
 import org.telran.shop.de.entity.User;
+import org.telran.shop.de.exception.AllreadyExist;
+import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.service.UserService;
 
 import java.util.ArrayList;
@@ -46,4 +49,16 @@ public class UserController {
         return service.delete(id);
     }
 
+// EXCEPTION -----------------------------------------------------------------------------------------------------------
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public String handleNotFoundException(Exception exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(AllreadyExist.class)
+    public String handleAllreadyExistException(Exception exception) {
+        return exception.getMessage();
+    }
 }
