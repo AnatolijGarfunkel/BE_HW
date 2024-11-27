@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telran.shop.de.entity.Address;
 import org.telran.shop.de.entity.User;
+import org.telran.shop.de.exception.AllreadyExist;
+import org.telran.shop.de.exception.NotFoundException;
 import org.telran.shop.de.repository.UserJpaRepository;
 
 import java.util.List;
@@ -18,6 +20,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByLogin(String login) {
+        User user = jpaRepository.findByLogin(login);
+        if (user == null) {
+            throw new NotFoundException("User with login " + login + " not found");
+        }
         return jpaRepository.findByLogin(login);
     }
 
@@ -25,6 +31,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        User login = getByLogin(user.getLogin());
+        if (login != null) {
+            throw new AllreadyExist("User with login " + user.getLogin() + " already exists");
+        }
         return jpaRepository.save(user);
     }
 
