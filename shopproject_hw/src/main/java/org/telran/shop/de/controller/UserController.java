@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.telran.shop.de.converter.Converter;
 import org.telran.shop.de.dto.DtoUser;
@@ -26,6 +27,9 @@ public class UserController {
     @Autowired
     private Converter<User, DtoUser, UserDto> converter;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
 
 // GET -----------------------------------------------------------------------------------------------------------------
 
@@ -41,6 +45,9 @@ public class UserController {
     @PostMapping
     public UserDto create(@RequestBody @Valid DtoUser dto) {
         User user = converter.toEntity(dto);
+        String password = user.getPassword();
+        String encode = encoder.encode(password);
+        user.setPassword(encode);
         User newUser = service.create(user);
         UserDto newDto = converter.toDto(newUser);
         return newDto;
