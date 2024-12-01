@@ -21,4 +21,8 @@ public class DtoUser {
     @Email
     private String email;
 
+    @NotEmpty
+    @NotEmpty
+    private String password;
+
 }

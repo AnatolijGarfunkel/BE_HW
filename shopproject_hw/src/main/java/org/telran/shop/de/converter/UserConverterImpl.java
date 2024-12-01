@@ -15,6 +15,6 @@ public class UserConverterImpl implements Converter<User, DtoUser, UserDto> {
 
     @Override
     public User toEntity(DtoUser dto) {
-        return new User(dto.getLogin(), dto.getEmail());
+        return new User(dto.getLogin(), dto.getEmail(), dto.getPassword());
     }
 }

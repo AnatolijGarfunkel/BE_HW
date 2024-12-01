@@ -24,10 +24,12 @@ public class User {
     @NotBlank
     private String login;
 
-    private String password;
-
     @Email
     private String email;
+
+    @NotNull
+    @NotBlank
+    private String password;
 
     @Column(name = "description")
     private String information;
@@ -41,10 +43,9 @@ public class User {
     private Passport passport;
 
 
-
-    public User(String login, String email) {
+    public User(String login, String email, String password) {
         this.login = login;
+        this.password = password;
         this.email = email;
     }
-
 }
